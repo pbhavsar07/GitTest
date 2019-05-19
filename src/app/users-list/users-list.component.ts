@@ -8,52 +8,29 @@ import { GitHubService } from '../github.service';
 })
 export class UsersListComponent implements OnInit {
  items=[];
-
+ copyitems=[]; 
  totalcount = 0;
  sortingoption = [ 'sortbyName', 'ReverseSortbyName','SortByRank', 'ReverseSortByRank' ] 
-  constructor(private _githubService:GitHubService){}
+ defaultSearch  = 'Varun'
+
+ constructor(private _githubService:GitHubService){}
  
-  defaultSearch  = 'Varun'
+ @ViewChild('SortingOption') SortingOption: ElementRef;
 
-copyitems=[];
-
-   @ViewChild('SortingOption') SortingOption: ElementRef;
-  
-
-objs = [ 
-    { first_nom: 'Lazslo', last_nom: 'Jamf'     },
-    { first_nom: 'Pig',    last_nom: 'Bodine'   },
-    { first_nom: 'Pirate', last_nom: 'Prentice' }
-];
-
-  
+ 
  ngOnInit()
   { 
      this.getUserList(this.defaultSearch);   
   }
   
-  //  sortWithName(nameSearch)
-  // {
-    
-  //      this.items = []; 
-  //      this.copyitems.filter(item => { 
-  //           console.log(item.login.toLowerCase().includes(nameSearch));
-         
-  //           if(item.login.toLowerCase().includes(nameSearch))
-  //           {
-  //             this.items.push(item);
-  //           }  
-  //       }) 
-  //     console.log(this.items);
-  // }
-
-
+  // sort as you type.
   sortWithName(nameSearch)
   {
     this.getUserList(nameSearch);
   }
 
-  search()
+// all the sorting functionalities.
+  sorting()
   {
     console.log(this.SortingOption.nativeElement.value); 
     
@@ -62,7 +39,7 @@ objs = [
       this.items = this.copyitems.sort(this.sortbyname); 
       console.log(this.items);  
      }
-     if(this.SortingOption.nativeElement.value == 'ReverseSortbyName')
+    else if(this.SortingOption.nativeElement.value == 'ReverseSortbyName')
      { 
        this.items = this.copyitems.sort(this.ReverseSortbyname); 
        console.log(this.items);  
@@ -106,10 +83,8 @@ objs = [
    return c2.score - c1.score;
   }
   
-  onNewRecipe()
-  {
-    console.log('Here');
-  }
+  
+  // fetching all the list of users.
   getUserList(name)
   {
    this._githubService.getUsersList(name)
@@ -118,7 +93,7 @@ objs = [
       this.items = data.items;  
       this.copyitems = data.items;  
        
-       // lower casing 
+       // lower casing - needed for sorting data alphabetically.
       for(var i=0;i<this.copyitems.length;i++){
          this.copyitems[i].login = this.copyitems[i].login.toLowerCase();
       }

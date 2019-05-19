@@ -10,8 +10,8 @@ placeholder="Select property Category" >
 [(ngModel)]='defaultSearch'
  (keyup)='sortWithName(nameSearch.value)'>
 
-<button (click)="search()"  class="btn btn-success"> 
-  Search </button>
+<button (click)="sorting()"  class="btn btn-success"> 
+    Search </button>
 <br>
   Total Results: {{ totalcount }}
   
@@ -23,14 +23,6 @@ placeholder="Select property Category" >
       [index]="i"  ></app-users-item>
       <pagination-controls (pageChange)="p = $event"></pagination-controls>
    </div>
-</div>
-
-
-<!-- <ul>
-    <li *ngFor="let item of items | paginate: { itemsPerPage: 3, currentPage: p }"> 
-      {{ item.login }}  
-    </li>
-  </ul> -->
-
+</div> 
  
 

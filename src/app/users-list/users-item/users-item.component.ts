@@ -15,29 +15,26 @@ export class UsersItemComponent implements OnInit {
   check1 = false;
   constructor(private _router: Router,
     private _githubService: GitHubService) { }
-    showdetails: boolean  = false;
-
+    showdetails: boolean  = false; 
     repoItem;
 
   ngOnInit() {
   }
 
+  // just a flag to display if there are more than 2 item.
   more()
- {
-  this.moreVar = true;
+  {
+    this.moreVar = true;
   }
-   
-  /*
-  /Additionally from each repository, 
-  you can show  ; name of repo  - name
-open issues count,  - open_issues_count 
-stars,   - stargazers_count
-followers (watchers),  - watchers_count
-fork count etc. - forks_count
- 
-  **/
- 
-   fetchmoreDetails(username)
+
+ // flag - to reduce number of records in the display.
+ collapse()
+  { 
+     this.moreVar = false; 
+  }
+
+// Fetches all the repo of specific user name
+   getRepositoryData(username)
   {  
     this.check1 = true;
     this._githubService.getUserDetails(username)
@@ -46,49 +43,37 @@ fork count etc. - forks_count
       this.userDetails = data ;
     })  
   }
+
+
+// clears out repository data.
   clear()
   {
     this.showdetails = false;
     this.repoItem = {};
-  }
+  } 
+
+  // shows repository data - Repo Name,Open Issue,Star Count, Watch count etc.
   getMoreData(repoitem)
   { 
     console.log(repoitem);
     this.repoItem = repoitem;
     this.showdetails = true;
   }
-  dropdown()
+
+  //redirects user to any profile page.
+  gotoGithub(username)
   {
-    //  this.userDetails=[];
-     this.moreVar = false;
-
+     window.open(`https://github.com/${username}`,'_blank');
   }
-
-  getUserDetails(value)
-  {   
-       this._githubService.getUserDetails(value)
-      .then(data => {
-        console.log("DATA: ",data);
-        this.userDetails = data ;
-      })  
-   
-      console.log(this.userDetails);
-  }
-
-  open()
-  {
-    document.getElementById('m_maxlength_modal').style.display = 'block';
-    document.getElementById('m_maxlength_modal').classList.add('show');
-
-    document.querySelector('#close').addEventListener('click', function() {
-        document.getElementById('m_maxlength_modal').classList.remove('show');
-        document.getElementById('m_maxlength_modal').style.display = 'none';
-    });
-    //redundant : need to correct
-    document.querySelector('#close-button').addEventListener('click', function() {
-        document.getElementById('m_maxlength_modal').classList.remove('show');
-        document.getElementById('m_maxlength_modal').style.display = 'none';
-    });
-  }
-
+  // //
+  // getUserDetails(value)
+  // {   
+  //      this._githubService.getUserDetails(value)
+  //     .then(data => {
+  //       console.log("DATA: ",data);
+  //       this.userDetails = data ;
+  //     })  
+  //     console.log(this.userDetails);
+  // }
+  
 }

@@ -7,14 +7,15 @@
   class="list-group-item clearfix">
   <div class="pull-left">
     <h4 class="list-group-item-heading">{{ userlist.login }}</h4>
-<p>
+
+<p (click)="gotoGithub(userlist.login)" >
     profile Url: http://github.com/{{ userlist.login }}
 </p>
 <!-- <h3> {{ userlist.score }}  </h3>  -->
     </div>
   <span class="pull-right">
         <img
-        (click)="fetchmoreDetails(userlist.login)"
+        (click)="getRepositoryData(userlist.login)"
           [src]="userlist.avatar_url"
           alt="{{ userlist.avatar_url }}"
           class="img-responsive"
@@ -30,9 +31,9 @@
 
 
       <div *ngIf='check1'> 
-          <button (click)="dropdown()" class="btn btn-warning"> collapse</button>
+          <button (click)="collapse()" class="btn btn-warning"> collapse</button>
           <button (click)="more()" class="btn btn-primary btn-sm"> more</button> 
-          <button (click)="clear()" class="btn btn-danger"> Clear </button> 
+          <button *ngIf='showdetails' (click)="clear()" class="btn btn-danger"> Clear </button> 
 
 
           <div (click)="getMoreData(x)" *ngFor='let x of userDetails;let i = index'>

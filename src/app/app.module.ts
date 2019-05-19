@@ -1,8 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-import { FilterPipe} from './filter.pipe';
-
 import { AppComponent } from './app.component';
 import { UsersListComponent } from './users-list/users-list.component';
 import { UsersItemComponent } from './users-list/users-item/users-item.component';
@@ -24,8 +21,7 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    UsersListComponent,
-    FilterPipe,
+    UsersListComponent, 
     UsersItemComponent,
     UserDetailsComponent
   ],
