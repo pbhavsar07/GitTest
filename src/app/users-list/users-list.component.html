@@ -1,0 +1,36 @@
+
+<select class="form-control m-input m-input--solid" 
+ #SortingOption  
+placeholder="Select property Category" >
+ <option *ngFor="let option of sortingoption" 
+    value={{option}}> {{ option }}</option>
+</select> 
+
+<input type='text' #nameSearch
+[(ngModel)]='defaultSearch'
+ (keyup)='sortWithName(nameSearch.value)'>
+
+<button (click)="search()"  class="btn btn-success"> 
+  Search </button>
+<br>
+  Total Results: {{ totalcount }}
+  
+<div class="row">
+  <div class="col-xs-12">
+    <app-users-item
+      *ngFor="let item of items| paginate: { itemsPerPage: 3, currentPage: p }; let i = index"
+      [userlist]="item"
+      [index]="i"  ></app-users-item>
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+   </div>
+</div>
+
+
+<!-- <ul>
+    <li *ngFor="let item of items | paginate: { itemsPerPage: 3, currentPage: p }"> 
+      {{ item.login }}  
+    </li>
+  </ul> -->
+
+ 
+

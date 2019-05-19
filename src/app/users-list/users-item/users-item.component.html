@@ -1,0 +1,58 @@
+
+<hr>
+
+
+<a
+  style="cursor: pointer"
+  class="list-group-item clearfix">
+  <div class="pull-left">
+    <h4 class="list-group-item-heading">{{ userlist.login }}</h4>
+<p>
+    profile Url: http://github.com/{{ userlist.login }}
+</p>
+<!-- <h3> {{ userlist.score }}  </h3>  -->
+    </div>
+  <span class="pull-right">
+        <img
+        (click)="fetchmoreDetails(userlist.login)"
+          [src]="userlist.avatar_url"
+          alt="{{ userlist.avatar_url }}"
+          class="img-responsive"
+          style="max-height: 50px;">
+      </span>
+
+<div *ngIf='showdetails'> 
+    Repo Name: {{repoItem.name}} <br> 
+    Open Issue: {{repoItem.open_issues_count}} <br>
+    Star Count: {{repoItem.stargazers_count }} <br>
+    watch Count:{{ repoItem.watchers_count}}<br> 
+</div>
+
+
+      <div *ngIf='check1'> 
+          <button (click)="dropdown()" class="btn btn-warning"> collapse</button>
+          <button (click)="more()" class="btn btn-primary btn-sm"> more</button> 
+          <button (click)="clear()" class="btn btn-danger"> Clear </button> 
+
+
+          <div (click)="getMoreData(x)" *ngFor='let x of userDetails;let i = index'>
+            <div *ngIf='i <= 1'> 
+                {{ x.name }} : {{ x.language ? x.language : '-'}}
+            </div>
+
+          </div> 
+        
+       <div *ngIf='moreVar'>
+          <div  (click)="getMoreData(x)" *ngFor='let x of userDetails;let j = index'>
+              <div *ngIf='j > 1'> 
+                  {{ x.name }} : {{ x.language ? x.language : '-'}}
+              </div>
+           </div>  
+       </div>
+       
+       
+
+      </div>
+</a>
+
+ 
