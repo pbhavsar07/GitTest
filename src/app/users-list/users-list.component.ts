@@ -1,6 +1,11 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { GitHubService } from '../github.service';
 
+
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/debounce';
+
 @Component({
   selector: 'app-users-list',
   templateUrl: './users-list.component.html',
@@ -25,7 +30,7 @@ export class UsersListComponent implements OnInit {
   
   // sort as you type.
   sortWithName(nameSearch)
-  {
+  { 
     this.getUserList(nameSearch);
   }
 
@@ -86,9 +91,11 @@ export class UsersListComponent implements OnInit {
   
   // fetching all the list of users.
   getUserList(name)
-  {
+  { 
    this._githubService.getUsersList(name)
-    .subscribe((data:any) => {
+    .debounceTime(200)
+    .distinctUntilChanged()
+   .subscribe((data:any) => {
       this.totalcount = data.total_count;
       this.items = data.items;  
       this.copyitems = data.items;  

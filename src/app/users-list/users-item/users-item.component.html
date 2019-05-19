@@ -1,26 +1,27 @@
 
-<hr>
 
 
 <a
   style="cursor: pointer"
   class="list-group-item clearfix">
-  <div class="pull-left">
+  
+  <div class="img-circle">
+        <img 
+          [src]="userlist.avatar_url"
+          alt="{{ userlist.avatar_url }}"
+          class="img-responsive"
+        >
+  </div>
+  <div class="information-text">
     <h4 class="list-group-item-heading">{{ userlist.login }}</h4>
 
 <p (click)="gotoGithub(userlist.login)" >
     profile Url: http://github.com/{{ userlist.login }}
 </p>
+<button  (click)="getRepositoryData(userlist.login)" 
+class="btn detial-btn"> Details </button> 
 <!-- <h3> {{ userlist.score }}  </h3>  -->
     </div>
-  <span class="pull-right">
-        <img
-        (click)="getRepositoryData(userlist.login)"
-          [src]="userlist.avatar_url"
-          alt="{{ userlist.avatar_url }}"
-          class="img-responsive"
-          style="max-height: 50px;">
-      </span>
 
 <div *ngIf='showdetails'> 
     Repo Name: {{repoItem.name}} <br> 

@@ -1,27 +1,40 @@
-
-<select class="form-control m-input m-input--solid" 
+<div class="row top-blue-box">
+<div class="col-md-6">
+  <select class="form-control m-input m-input--solid" 
  #SortingOption  
 placeholder="Select property Category" >
  <option *ngFor="let option of sortingoption" 
     value={{option}}> {{ option }}</option>
 </select> 
+</div>
 
-<input type='text' #nameSearch
-[(ngModel)]='defaultSearch'
- (keyup)='sortWithName(nameSearch.value)'>
+<div class="col-md-6">
+  <input type='text' #nameSearch 
+  class="form-control search-box"
+  [(ngModel)]='defaultSearch'
+  (keyup)='sortWithName(nameSearch.value)'> 
 
-<button (click)="sorting()"  class="btn btn-success"> 
-    Search </button>
+
+<button (click)="sorting()"  class="btn btn-success search-btn">  Search </button>
+
+  </div>
+
+</div>
+
+
+
 <br>
   Total Results: {{ totalcount }}
   
-<div class="row">
-  <div class="col-xs-12">
+<div class="row ">
+  <div class="col-md-12">
     <app-users-item
       *ngFor="let item of items| paginate: { itemsPerPage: 3, currentPage: p }; let i = index"
       [userlist]="item"
       [index]="i"  ></app-users-item>
+<div class="col-md-8 float-right pagination">
       <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </div>
    </div>
 </div> 
  

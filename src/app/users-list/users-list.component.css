@@ -1,0 +1,23 @@
+.top-blue-box
+{
+    background: #559ee8;
+    padding: 25px;
+
+}
+.search-btn
+{
+        position: absolute;
+        right: 0;
+        top: 0;
+        right: 14px;   
+}
+.search-box
+{
+    position: relative;
+}
+.pagination
+{ 
+    float: right;
+    margin-top: 25px;
+}
+ 
